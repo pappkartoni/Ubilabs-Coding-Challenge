@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03-css</title>
+    <style>
+        section {
+            margin-inline: auto;
+            margin-top: 100px;
+            text-align: center;
+            max-width: 768px;
+        }
+        .timer {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(to right, aquamarine 50%, white 50%);
+            border-radius: 100%;
+            position: relative;
+            animation: time 10s steps(10, start) infinite;
+        }
+        .mask {
+            border-radius: 100% 0 0 100% / 50% 0 0 50%;
+            position: absolute;
+            height: 100%;
+            left: 0;
+            top: 0;
+            width: 50%;
+            animation: mask 10s steps(5, start) infinite;
+            transform-origin: 100% 50%;
+        }
+        .inner {
+            width: 90px;
+            height: 90px;
+            z-index: 2;
+            background-color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+        @keyframes time {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes mask {
+            0% {
+                background: white;
+                transform: rotate(0deg);
+            }
+            50% {
+                background: white;
+                transform: rotate(-180deg);
+            }
+            50.01% {
+                background: aquamarine;
+                transform: rotate(0deg);
+            }
+            100% {
+                background: aquamarine;
+                transform: rotate(-180deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!--
+        To be honest I am not very familar with how animations work besides some basic transformations and would've needed a lot more time to figure out a way
+        to animate a circle like this using 2 overlapping half circles to make it look like a single circle filling up, which is why i looked up the logic behind this and just implemented it from there
+    -->
+    <section>
+        <div class="timer">
+            <div class="mask"></div>
+            <div class="inner"></div>
+        </div>
+    </section>
+</body>
+</html>

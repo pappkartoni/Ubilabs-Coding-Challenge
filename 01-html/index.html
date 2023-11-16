@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-html</title>
+    <!--
+        No styling, just centered the form
+    -->
+    <style>
+        section {
+            margin-inline: auto;
+            margin-top: 100px;
+            text-align: center;
+            max-width: 768px;
+        }
+        form {
+            display: table;
+            margin-inline: auto;
+        }
+        form div {
+            display: table-row;
+        }
+        label, input {
+            display: table-cell;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        Very basic solution using built-in form validation as this does what was asked in the task. No preventDefault shenanigans necessary to stop the form from reloading the page with invalid data.
+    -->
+    <section>
+        <h1>01-html</h1>
+        <form onsubmit="">
+            <div id="mail">
+                <label for="email">Enter E-Mail</label>
+                <input type="email" name="email" required />
+            </div>
+            <div id="pw">
+                <label for="password">Enter Password</label>
+                <input type="password" name="password" required />
+            </div>
+            <button type="submit">
+                Submit
+            </button>
+        </form>
+    </section>
+</body>
+</html>

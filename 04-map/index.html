@@ -1,0 +1,43 @@
+Add your solution here. <br>
+Hint: Ask Ubilabs for the temporary API key.
+
+
+<div id="map" style="height: 800px;"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE3_KcCXDP6Jlsh3m0375akqXfEZmCIwc&libraries=geometry"></script>
+
+<script>
+  async function initMap() {
+    const map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 53.54, lng: 9.98},
+      zoom: 2 //center on Hamburg obv, zoomed out more to see all the markers
+    });
+  
+    const allMarkers = [] //save refs to the markers somewhere
+    const infoWindow = new google.maps.InfoWindow() //not really needed here, just to show the index / title of the clicked marker
+  
+    for (let i = 0; i < 200; i++) { // 200 random markers
+      const marker = new google.maps.Marker({
+        map,
+        position: {lat: Math.random() * 360 - 180, lng: Math.random() * 360 - 180}, //im sure there are better ways to do this but this does the trick for now
+        title: i.toString(),
+      })
+
+      // also probably better ways to do this but with the time constraint this was the first working idea i had so i stuck with it
+      // each marker gets a listener on click that makes the 10 closest markers bounce, distance calculated by computeDistanceBetween
+      // sorting all markers by distance, leaving out the first one (which is the marker itself)
+      // since the bounce has a slight fade out clicking on another marker which has an overlapping neighbor will lead to the bounces not being synchronized anymore
+      marker.addListener("click", () => {
+        allMarkers.forEach(m => m.setAnimation(null))
+        const byDist = allMarkers.sort((a,b) => google.maps.geometry.spherical.computeDistanceBetween(a.position, marker.position) - google.maps.geometry.spherical.computeDistanceBetween(b.position, marker.position))
+        const closest = byDist.slice(1, 11)
+        closest.forEach(m => m.setAnimation(google.maps.Animation.BOUNCE))
+        infoWindow.close()
+        infoWindow.setContent(marker.title)
+        infoWindow.open(marker.map, marker)
+      })
+      allMarkers.push(marker)
+    }
+  }
+  initMap();
+</script>

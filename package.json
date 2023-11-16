@@ -1,0 +1,13 @@
+{
+  "name": "ubilabs-tests",
+  "version": "1.0.0",
+  "description": "Ubilabs Tests",
+  "scripts": {
+    "start": "http-server . --port 1337"
+  },
+  "author": "kleppe@ubilabs.com",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
